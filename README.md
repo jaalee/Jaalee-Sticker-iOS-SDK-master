@@ -20,6 +20,6 @@ If you need stickers in larger quantities, please contact our sales dept:  sales
 
 Our Team：[JAALEE](http://www.jaalee.com/)
 
-Website：[http://www.jaalee.com/](http://www.jaalee.com/)
+JAALEE Website：[http://www.jaalee.com/](http://www.jaalee.com/)
 
 Contact Us：Service@jaalee.com
