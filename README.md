@@ -18,7 +18,7 @@ You can email us with any question or problem you are having, and we will try ha
 
 If you need stickers in larger quantities, please contact our sales dept:  sales@jaalee.com
 
-Our Team：JAALEE
+Our Team：[JAALEE](http://www.jaalee.com/)
 
 Website：[http://www.jaalee.com/](http://www.jaalee.com/)
 
