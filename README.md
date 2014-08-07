@@ -12,11 +12,11 @@ It allows for:
 
 Dear JAALEE SDK developer.
 
-We are happy to share with you our latest SDK for iOS.
+We are happy to share with you our latest Sticker SDK for iOS.
 
 You can email us with any question or problem you are having, and we will try hard to reply asap. Email: dev@jaalee.com
 
-If you need stickers in larger quantities, please contact our sales dept:  sales@jaalee.com
+If you need stickers in larger quantities, please contact our sales dept: sales@jaalee.com
 
 Our Team：[JAALEE](http://www.jaalee.com/)
 
