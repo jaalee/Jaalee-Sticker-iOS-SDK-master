@@ -24,6 +24,7 @@
 
 @property (weak, nonatomic) IBOutlet NSTimer *mReadRSSITimer;
 
+@property (weak, nonatomic) IBOutlet UISwitch *mStickerState;
 - (IBAction)OnSelectSegment:(id)sender;
 
 @property (nonatomic, strong) JLEStickerDevice          *mSelectStickerDevice;
@@ -31,4 +32,8 @@
 - (IBAction)OnTouchUpdateName:(id)sender;
 
 - (IBAction)OnTouchCallSticker:(id)sender;
+
+- (IBAction)OnTouchBeaconState:(id)sender;
+
+
 @end

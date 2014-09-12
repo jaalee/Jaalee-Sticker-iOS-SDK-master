@@ -5,8 +5,6 @@
 //  Created by jaalee on 14-4-22.
 //  Copyright (c) 2014年 jaalee. All rights reserved.
 //
-//  http://www.jaalee.com/
-//
 
 #import <Foundation/Foundation.h>
 #import "JLEStickerDevice.h"

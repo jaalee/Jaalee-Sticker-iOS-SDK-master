@@ -108,12 +108,27 @@
     }
 }
 
+- (void) ReadDeviceState
+{
+    if (self.mSelectStickerDevice.isConnected) {
+        [self.mSelectStickerDevice readStickerStateWithCompletion:^(Jaalee_Sticker_State value, NSError* error){
+            if (value == STICKER_STATE_ENABLE) {
+                [self.mStickerState setOn:true animated:true];
+            }
+            else
+            {
+                [self.mStickerState setOn:false animated:true];
+            }
+        }];
+    }
+}
+
 #pragma mark - Write Beacon Parameter Method
-- (void) ChangeTxPowerValue:(JLEStickerPower)power
+- (void) ChangeTxPowerValue:(JLEStickerTxPower)power
 {
     if (self.mSelectStickerDevice.isConnected) {
         
-        [self.mSelectStickerDevice ChangeStickerTxPower:power withCompletion:^(BOOL value, NSError* error){
+        [self.mSelectStickerDevice writeStickerTxPower:power withCompletion:^(BOOL value, NSError* error){
             
             if (value) {
                 NSLog(@"Sticker Tx Power Config Success..");
@@ -127,7 +142,7 @@
 - (void) ChangeDeviceName:(NSString*)name
 {
     if (self.mSelectStickerDevice.isConnected) {
-        [self.mSelectStickerDevice ChangeStickerDeviceName:name withCompletion:^(BOOL value, NSError* error){
+        [self.mSelectStickerDevice writeStickerDeviceName:name withCompletion:^(BOOL value, NSError* error){
             
             if (value) {
                 NSLog(@"Sticker Device Name Config Success..");
@@ -137,21 +152,6 @@
         }];
     }
 }
-
-- (void) ChangeStickerDataDeliverInterval:(JaaLeeConnectParameter)value
-{
-    if (self.mSelectStickerDevice.isConnected) {
-        [self.mSelectStickerDevice ChangeStickerDataDeliverInterval:value withCompletion:^(BOOL value, NSError* error){
-            
-            if (value) {
-                NSLog(@"Sticker data deliver interval Config Success..");
-                [WaitProgressShow showSuccessWithStatus:@"Sticker data deliver interval Config Success.."];
-            }
-        }];
-    }
-}
-
-
 
 #pragma mark - Local Method
 
@@ -177,6 +177,12 @@
         [self ReadDeviceName];
     }];
     
+    [UIView animateWithDuration:0.0 delay:2.0 options:UIViewAnimationOptionAllowUserInteraction animations:^{
+    } completion:^(BOOL finished) {
+        
+        [self ReadDeviceState];
+    }];
+    
 }
 
 
@@ -188,14 +194,14 @@
     
     switch (Index) {
             
-        case 0://Far
-            [self ChangeTxPowerValue:JLEStickerPowerLevel3];
+        case 0://-4 dBm
+            [self ChangeTxPowerValue:JLEStickerTxPowerLevel3];
             break;
-        case 1://Medium
-            [self ChangeTxPowerValue:JLEStickerPowerLevel2];
+        case 1://0 dBm
+            [self ChangeTxPowerValue:JLEStickerTxPowerLevel2];
             break;
-        case 2://Close
-            [self ChangeTxPowerValue:JLEStickerPowerLevel1];
+        case 2://+4 dBm
+            [self ChangeTxPowerValue:JLEStickerTxPowerLevel1];
             break;
         default:
             break;
@@ -212,5 +218,43 @@
     if (self.mSelectStickerDevice.isConnected) {
         [self.mSelectStickerDevice callJaaleeSticker];
     }
+}
+
+- (IBAction)OnTouchBeaconState:(id)sender {
+    
+    UISwitch *temp = sender;
+    [WaitProgressShow showWithStatus:@"Trying to set the sticker state"];
+    if (temp.isOn) {
+        if (self.mSelectStickerDevice.isConnected) {
+            [self.mSelectStickerDevice writeStickerState:STICKER_STATE_ENABLE withCompletion:^(BOOL value, NSError* error){
+                
+                if (value) {
+                    [WaitProgressShow showSuccessWithStatus:@"Sticker state set successfully"];
+                }
+                else
+                {
+                    [WaitProgressShow showSuccessWithStatus:@"Sticker state set failed"];
+                }
+
+            }];
+        }
+    }
+    else
+    {
+        if (self.mSelectStickerDevice.isConnected) {
+            [self.mSelectStickerDevice writeStickerState:STICKER_STATE_DISABLE withCompletion:^(BOOL value, NSError* error){
+                
+                if (value) {
+                    [WaitProgressShow showSuccessWithStatus:@"Sticker state set successfully"];
+                }
+                else
+                {
+                    [WaitProgressShow showSuccessWithStatus:@"Sticker state set failed"];
+                }
+                
+            }];
+        }
+    }
+    
 }
 @end

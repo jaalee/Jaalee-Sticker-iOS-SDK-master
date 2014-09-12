@@ -1,11 +1,9 @@
 //
-//  JLEStickerDevice.h
-//  JaaleeStickerSDK
+//  JLEsticker.h
+//  JaaleestickerSDK
 //
 //  Created by jaalee on 14-4-22.
 //  Copyright (c) 2014年 jaalee. All rights reserved.
-//
-//  http://www.jaalee.com/
 //
 
 #import <Foundation/Foundation.h>
@@ -78,7 +76,7 @@
 
 /**
  
- You do not create instances of this class directly. The JLEStickerManager object reports encountered stickers to its associated delegate object. You can use the information in a sticker object to identify which sticker device was encountered.
+ You do not create instances of this class directly. The JLEstickerManager object reports encountered stickers to its associated delegate object. You can use the information in a sticker object to identify which sticker device was encountered.
  
  It allows to connect with Jaalee sticker to read / write its characteristics.
  
@@ -86,21 +84,12 @@
 
 @interface JLEStickerDevice : NSObject
 
+- (id) initWithID:(NSString*)ID;
 
 @property (nonatomic, weak)     id <JLEStickerDeviceDelegate>  delegate;
 
 @property (nonatomic, strong)        CBCentralManager *manager;
 /// @name Publicly available properties
-
-/**
- *  macAddress
- *
- *  Discussion:
- *    Hardware MAC address of the sticker device.
- */
-
-@property (nonatomic, strong)   NSString*               macAddress;
-
 /**
  *  name
  *
@@ -108,7 +97,6 @@
  *    name of the sticker device.
  */
 @property (nonatomic, strong)   NSString*               name;
-
 
 /**
  *  rssi
@@ -119,6 +107,29 @@
  */
 @property (nonatomic)           NSInteger               rssi;
 
+/**
+ *  isConnectable
+ *
+ *    Whether the sticker can be connected
+ *
+ */
+@property (nonatomic)           BOOL               isConnectable;
+
+/**
+ *  isConnected
+ *
+ *    Flag indicating connection status.
+ */
+@property (nonatomic, readonly)   BOOL                  isConnected;
+
+
+/**
+ *  StickerID
+ *
+ *    The ID of jaalee sticker.
+ */
+@property (nonatomic, strong)   NSString*           StickerID;
+
 
 /**
  *  peripheral
@@ -127,18 +138,11 @@
  */
 @property (nonatomic, strong)   CBPeripheral*           peripheral;
 
+
+
+
 /////////////////////////////////////////////////////
-// properties filled when read characteristic
-
-/// @name Properties available after connection
-
-
-/**
- *  isConnected
- *
- *    Flag indicating connection status.
- */
-@property (nonatomic, readonly)   BOOL                  isConnected;
+// @name Properties available after connection
 
 /**
  *  isJaaleesticker
@@ -148,26 +152,62 @@
 @property (nonatomic, readonly)   BOOL                  isJaaleeSticker;
 
 /**
- *  txPower
+ *  batteryLevel
  *
- *    Power of signal in dBm. Value available after connection with the sticker. It takes one of the values represented by JLEStickerPower .
+ *    Battery strength in %. Battery level change from 100% - 0%. Value available after connection with the sticker
  */
-@property (nonatomic, strong)   NSNumber*               txPower;
+@property (nonatomic, strong, readonly)   NSNumber*               batteryLevel;
 
 /**
  *  batteryLevel
  *
  *    Battery strength in %. Battery level change from 100% - 0%. Value available after connection with the sticker
  */
-@property (nonatomic, strong)   NSNumber*               batteryLevel;
+@property (nonatomic, strong, readonly)   NSString*               firmwareVersion;
 
+/**
+ *  macAddress
+ *
+ *  Discussion:
+ *    Hardware MAC address of the sticker device.
+ */
+@property (nonatomic, strong, readonly)   NSString*               macAddress;
 
+/**
+ *  stickerState
+ *
+ *    The sticker state. Value available after connection with the sticker
+ */
+@property (nonatomic, readonly)   Jaalee_Sticker_State               stickerState;
+
+/**
+ *  txPower
+ *
+ *    Power of signal in dBm. Value available after connection with the sticker. It takes one of the values represented by JLEstickerPower .
+ */
+@property (nonatomic, readonly)   JLEStickerTxPower               txPower;
+
+/**
+ *  advInterval
+ *
+ *    Advertising interval of the sticker. Value change from 100ms to 10000ms. Value available after connection with the sticker
+ */
+@property (nonatomic, strong, readonly)   NSNumber*               advInterval;
+
+/**
+ *  audioState
+ *
+ *    the audio state of the sticker. Value available after connection with the sticker
+ */
+@property (nonatomic, readonly)   Jaalee_Sticker_Audio_State      audioState;
 
 /// @name Connection handling methods
 
 
 /**
  * Connect to particular sticker using bluetooth.
+ * Connection is required to change values like
+ * Device name, txPower and Advertising interval.
  *
  * @return void
  */
@@ -181,15 +221,17 @@
 -(void)disconnectSticker;
 
 
+/// @name Methods for reading sticker configuration
 /**
- * Read Tx power of connected sticker (Previous connection
+ * Read advertising interval of connected sticker (Previous connection
  * required)
  *
- * @param completion block with power value as param
+ * @param completion block with advertising interval value as param
  *
  * @return void
  */
-- (void)readStickerTxPowerWithCompletion:(JLEPowerCompletionBlock)completion;
+- (void)readStickerAdvIntervalWithCompletion:(JLEUnsignedShortCompletionBlock)completion;
+
 
 /**
  * Read battery level of connected sticker (Previous connection
@@ -212,62 +254,113 @@
  */
 - (void)readStickerDeviceNameWithCompletion:(JLEStringCompletionBlock)completion;
 
-
+/**
+ * Read device state of connected sticker (Previous connection
+ * required)
+ *
+ * @param completion block with device state as param
+ *
+ * @return void
+ */
+- (void)readStickerStateWithCompletion:(JLEStickerStateCompletionBlock)completion;
 
 /**
- * Change txPower of bluetooth connected sticker.
+ * Read device audio state of connected sticker (Previous connection
+ * required)
  *
- * @param txPower advertising sticker power (can take value from JLEStickerPowerLevel1 / waak to JLEStickerPowerLevel3 / strong)
+ * @param completion block with device state as param
+ *
+ * @return void
+ */
+- (void)readAudioStateWithCompletion:(JLEStickerAudioStateCompletionBlock)completion;
+
+/// @name Methods for writing sticker configuration
+
+/**
+ * Writes advertising interval (in milisec) of connected sticker.
+ *
+ * @param advertising interval of sticker (100 - 10000 ms)
  * @param completion block handling operation completion
  *
  * @return void
  */
-- (void)ChangeStickerTxPower:(JLEStickerPower)txPower withCompletion:(JLEBoolCompletionBlock)completion;
+- (void)writeStickerAdvInterval:(unsigned short)interval withCompletion:(JLEBoolCompletionBlock)completion;
 
 
 /**
- * Change device name of bluetooth connected sticker.
+ * Writes txPower of bluetooth connected sticker.
+ *
+ * @param txPower advertising sticker power (can take value from JLEstickerPowerLevel1 / waak to JLEstickerPowerLevel11 / strong)
+ 
+ * @param completion block handling operation completion
+ *
+ * @return void
+ */
+- (void)writeStickerTxPower:(JLEStickerTxPower)txPower withCompletion:(JLEBoolCompletionBlock)completion;
+
+
+/**
+ * Writes device name of bluetooth connected sticker.
  *
  * @param name sticker device name (lenth <= 15byte)
  * @param completion block handling operation completion
  *
  * @return void
  */
-- (void)ChangeStickerDeviceName:(NSString*)name withCompletion:(JLEBoolCompletionBlock)completion;
+- (void)writeStickerDeviceName:(NSString*)name withCompletion:(JLEBoolCompletionBlock)completion;
 
 
 /**
- * Change sticker data deliver interval of bluetooth connected sticker.
+ * Writes device state of bluetooth connected sticker.
  *
- * @param interval Connection interval (can take value from JLConnectParameter_100 to JLConnectParameter_2000)
+ * @param state sticker device state
  * @param completion block handling operation completion
  *
  * @return void
  */
-- (void)ChangeStickerDataDeliverInterval:(JaaLeeConnectParameter)interval withCompletion:(JLEBoolCompletionBlock)completion;
+- (void) writeStickerState:(Jaalee_Sticker_State)state withCompletion:(JLEBoolCompletionBlock)completion;
+
+/**
+ * Writes device audio state of bluetooth connected sticker.
+ *
+ * @param state audio state
+ * @param completion block handling operation completion
+ *
+ * @return void
+ */
+- (void) writeAudioState:(Jaalee_Sticker_Audio_State)state withCompletion:(JLEBoolCompletionBlock)completion;
 
 
 /**
  * Call the sticker of bluetooth connected sticker.
  *
- * @return void
+ * @return BOOL
  */
-- (void) callJaaleeSticker;
+- (BOOL) callJaaleeSticker;
 
 /**
  * Enable jaalee sticker ring when disconnect.
  *
  * @return void
  */
-- (void) enableJaaleeStickerRingWhenDisconnect;
+- (BOOL) enableJaaleeStickerRingWhenDisconnect;
 
 /**
  * Disable jaalee sticker ring when disconnect.
  *
- * @return void
+ * @return BOOL
  */
-- (void) disableJaaleeStickerRingWhenDisconnect;
+- (BOOL) disableJaaleeStickerRingWhenDisconnect;
 
+
+/**
+ * Delay the alarm time when disconnect,
+ *
+ * @param second delay time (1s-120s)
+ *
+ * @return BOOL
+ */
+- (BOOL) delayAlarmWhenDisconnect:(int)second;
 
 /**
  * read jaalee sticker rssi value.
@@ -275,5 +368,9 @@
  * @return void
  */
 - (void) readStickerRSSIValue;
-
 @end
+
+
+
+
+

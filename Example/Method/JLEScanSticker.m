@@ -69,10 +69,12 @@
 #pragma mark - JLEStickerConfigManager delegate
 
 -(void)stickerManager:(JLEStickerManager *)manager didDiscoverSticker:(JLEStickerDevice *)sticker RSSI:(NSNumber *)RSSI
-{    
+{
+    
     for (int i = 0; i < _mStickerDeviceList.count; i++) {
         JLEStickerDevice *temp = [_mStickerDeviceList objectAtIndex:i];
         if (temp == sticker) {
+            [self.mTableView reloadData];
             return;
         }
     }
@@ -114,7 +116,7 @@
     JLEStickerDevice *temp = [_mStickerDeviceList objectAtIndex:indexPath.row];
     
     name.text = temp.name;
-    StickerID.text = [temp.peripheral.identifier UUIDString];
+    StickerID.text = temp.StickerID;
     rssi.text = [NSString stringWithFormat:@"%ld", (long)temp.rssi];
     
     

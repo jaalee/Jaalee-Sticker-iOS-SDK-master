@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C4519B19191B403D00427F32 /* libJaaleeStickerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C4519B18191B403D00427F32 /* libJaaleeStickerSDK.a */; };
+		C44262A419C02C4600B2EEB9 /* libJaaleeStickerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C44262A319C02C4600B2EEB9 /* libJaaleeStickerSDK.a */; };
 		C45DFAC5191A64AA005977AB /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45DFAC4191A64AA005977AB /* Foundation.framework */; };
 		C45DFAC7191A64AA005977AB /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45DFAC6191A64AA005977AB /* CoreGraphics.framework */; };
 		C45DFAC9191A64AA005977AB /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C45DFAC8191A64AA005977AB /* UIKit.framework */; };
@@ -28,6 +28,7 @@
 		C45DFB0F191A6524005977AB /* near_image.png in Resources */ = {isa = PBXBuildFile; fileRef = C45DFB0B191A6524005977AB /* near_image.png */; };
 		C45DFB10191A6524005977AB /* unknown_image.png in Resources */ = {isa = PBXBuildFile; fileRef = C45DFB0C191A6524005977AB /* unknown_image.png */; };
 		C45DFB13191A6572005977AB /* JLEContralStickerDemo.m in Sources */ = {isa = PBXBuildFile; fileRef = C45DFB12191A6572005977AB /* JLEContralStickerDemo.m */; };
+		C45DFB15191A6593005977AB /* libJaaleeStickerSDK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = C45DFB14191A6593005977AB /* libJaaleeStickerSDK.a */; };
 		C4DAC2F2191B2429002A00DB /* JLEScanSticker.m in Sources */ = {isa = PBXBuildFile; fileRef = C4DAC2F1191B2429002A00DB /* JLEScanSticker.m */; };
 /* End PBXBuildFile section */
 
@@ -42,10 +43,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C4519B15191B403D00427F32 /* JLEStickerDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLEStickerDefinitions.h; sourceTree = "<group>"; };
-		C4519B16191B403D00427F32 /* JLEStickerDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLEStickerDevice.h; sourceTree = "<group>"; };
-		C4519B17191B403D00427F32 /* JLEStickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JLEStickerManager.h; sourceTree = "<group>"; };
-		C4519B18191B403D00427F32 /* libJaaleeStickerSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libJaaleeStickerSDK.a; sourceTree = "<group>"; };
+		C44262A019C02C4600B2EEB9 /* JLEStickerDefinitions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JLEStickerDefinitions.h; path = ../SDK/JLEStickerDefinitions.h; sourceTree = "<group>"; };
+		C44262A119C02C4600B2EEB9 /* JLEStickerDevice.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JLEStickerDevice.h; path = ../SDK/JLEStickerDevice.h; sourceTree = "<group>"; };
+		C44262A219C02C4600B2EEB9 /* JLEStickerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JLEStickerManager.h; path = ../SDK/JLEStickerManager.h; sourceTree = "<group>"; };
+		C44262A319C02C4600B2EEB9 /* libJaaleeStickerSDK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libJaaleeStickerSDK.a; path = ../SDK/libJaaleeStickerSDK.a; sourceTree = "<group>"; };
 		C45DFAC1191A64AA005977AB /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C45DFAC4191A64AA005977AB /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		C45DFAC6191A64AA005977AB /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -82,7 +83,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4519B19191B403D00427F32 /* libJaaleeStickerSDK.a in Frameworks */,
+				C44262A419C02C4600B2EEB9 /* libJaaleeStickerSDK.a in Frameworks */,
+				C45DFB15191A6593005977AB /* libJaaleeStickerSDK.a in Frameworks */,
 				C45DFAC7191A64AA005977AB /* CoreGraphics.framework in Frameworks */,
 				C45DFAC9191A64AA005977AB /* UIKit.framework in Frameworks */,
 				C45DFAC5191A64AA005977AB /* Foundation.framework in Frameworks */,
@@ -105,7 +107,7 @@
 		C45DFAB8191A64AA005977AB = {
 			isa = PBXGroup;
 			children = (
-				C45DFB18191A65CA005977AB /* SDK */,
+				C45DFB18191A65CA005977AB /* Inc */,
 				C45DFAFA191A6513005977AB /* Method */,
 				C45DFAF9191A650E005977AB /* Res */,
 				C45DFACA191A64AA005977AB /* Example */,
@@ -202,15 +204,15 @@
 			name = Method;
 			sourceTree = "<group>";
 		};
-		C45DFB18191A65CA005977AB /* SDK */ = {
+		C45DFB18191A65CA005977AB /* Inc */ = {
 			isa = PBXGroup;
 			children = (
-				C4519B15191B403D00427F32 /* JLEStickerDefinitions.h */,
-				C4519B16191B403D00427F32 /* JLEStickerDevice.h */,
-				C4519B17191B403D00427F32 /* JLEStickerManager.h */,
-				C4519B18191B403D00427F32 /* libJaaleeStickerSDK.a */,
+				C44262A019C02C4600B2EEB9 /* JLEStickerDefinitions.h */,
+				C44262A119C02C4600B2EEB9 /* JLEStickerDevice.h */,
+				C44262A219C02C4600B2EEB9 /* JLEStickerManager.h */,
+				C44262A319C02C4600B2EEB9 /* libJaaleeStickerSDK.a */,
 			);
-			name = SDK;
+			name = Inc;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -402,7 +404,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LINK_WITH_STANDARD_LIBRARIES = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -435,7 +436,6 @@
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
-				LINK_WITH_STANDARD_LIBRARIES = YES;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -451,10 +451,14 @@
 				INFOPLIST_FILE = "Example/Example-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SDK",
-					"$(PROJECT_DIR)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/JaaleeStickerSDK-ejzcpsuukcukwxapxtaeinqssyxq/Build/Products/Debug-iphoneos",
+					/Users/jaalee/Desktop/Sticker,
+					"SDK开发",
+					"2.0/Jaalee-Sticker-iOS-SDK-master/SDK",
+					/Users/jaalee/Desktop/Sticker,
+					"SDK开发",
+					"2.0/Jaalee-Sticker-iOS-SDK-master/SDK",
 				);
-				LINK_WITH_STANDARD_LIBRARIES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -470,10 +474,14 @@
 				INFOPLIST_FILE = "Example/Example-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/SDK",
-					"$(PROJECT_DIR)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/JaaleeStickerSDK-ejzcpsuukcukwxapxtaeinqssyxq/Build/Products/Debug-iphoneos",
+					/Users/jaalee/Desktop/Sticker,
+					"SDK开发",
+					"2.0/Jaalee-Sticker-iOS-SDK-master/SDK",
+					/Users/jaalee/Desktop/Sticker,
+					"SDK开发",
+					"2.0/Jaalee-Sticker-iOS-SDK-master/SDK",
 				);
-				LINK_WITH_STANDARD_LIBRARIES = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
